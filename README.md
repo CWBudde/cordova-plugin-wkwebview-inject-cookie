@@ -1,2 +1,14 @@
 # cordova-plugin-wkwebview-cookie-sync
-An alternative way to sync cookies for a wkWebView
+
+While this plugin has not been tested properly so far it should provide an alternative way to sync cookies in a wkWebView implemantation.
+
+This is necessary as cookies may not get synced properly on the very first start of the app. 
+
+## Usage
+
+```
+document.addEventListener('deviceready', () => {
+  const args = ['GET', 'https://my.site.com'];
+  cordova.exec(null, null, 'WKWebViewSyncCookies', 'sync', args);
+});
+```
