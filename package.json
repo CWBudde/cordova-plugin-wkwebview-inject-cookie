@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-wkwebview-cookie-sync",
   "description": "Cordova plugin to sync cookies in a WKWebView",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Christian-W. Budde <CWBudde@pcjv.de>",
   "bugs": {
     "url": "https://github.com/CWBudde/cordova-plugin-wkwebview-cookie-sync/issues"
