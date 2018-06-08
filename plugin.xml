@@ -16,7 +16,7 @@
     </config-file>
 		<repo>https://github.com/CWBudde/cordova-plugin-wkwebview-cookie-sync.git</repo>
     <js-module src="www/cookiesync.js" name="cookiesync">
-      <clobbers target="wkwebview" />
+      <clobbers target="wkwebview.cookiesync" />
     </js-module>
     <header-file src="src/ios/WKWebViewCookieSync.h" />
     <source-file src="src/ios/WKWebViewCookieSync.m" />
