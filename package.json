@@ -30,5 +30,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/psirenny/cordova-plugin-wkwebview-cookie-sync.git"
-  },
+  }
 }
