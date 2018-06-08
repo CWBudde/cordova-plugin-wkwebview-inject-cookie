@@ -8,7 +8,6 @@ This is necessary as cookies may not get synced properly on the very first start
 
 ```
 document.addEventListener('deviceready', () => {
-  const args = ['GET', 'https://my.site.com'];
-  cordova.exec(null, null, 'WKWebViewSyncCookies', 'sync', args);
+  wkwebview.sync();
 });
 ```
