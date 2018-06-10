@@ -15,6 +15,7 @@
  */
 
 #import "WKWebViewCookieSync.h"
+#import <WebKit/WebKit.h>
 #import <Cordova/CDV.h>
 
 @implementation WKWebViewCookieSync
@@ -24,7 +25,7 @@
   NSLog(@"Cookie sync attempt");
 
   WKWebView* wkWebView = (WKWebView*) self.webView;
-  wkWView.configuration.processPool = [[WKProcessPool alloc] init];
+  wkWebView.configuration.processPool = [[WKProcessPool alloc] init];
 
 	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
 	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
