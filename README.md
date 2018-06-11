@@ -8,6 +8,6 @@ This is necessary as cookies may not get synced properly on the very first start
 
 ```
 document.addEventListener('deviceready', () => {
-  wkwebview.injectCookie('mydomain.com', '/mypath');
+  wkwebview.injectCookie('mydomain.com/mypath');
 });
 ```

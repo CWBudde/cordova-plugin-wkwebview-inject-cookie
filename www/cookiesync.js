@@ -17,7 +17,12 @@
 var exec = require('cordova/exec');
 
 module.exports = {
-    injectCookie: function (domain, path, successCallback, errorCallback) {
+    injectCookie: function (url, successCallback, errorCallback) {
+
+        var sPos = url.indexOf("\/");
+        var domain = url.substr(0,sPos);
+        var path = url.substr(sPos,(url.length-sPos));
+
         exec(successCallback, errorCallback, 'WKWebViewCookieSync', 'injectCookie', [domain, path]);
     }
 };
