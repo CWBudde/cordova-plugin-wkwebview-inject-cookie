@@ -17,7 +17,7 @@
 var exec = require('cordova/exec');
 
 module.exports = {
-    cookieSync: function (successCallback, errorCallback) {
-        exec(successCallback, errorCallback, 'WKWebViewCookieSync', 'sync', []);
+    injectCookie: function (domain, path, successCallback, errorCallback) {
+        exec(successCallback, errorCallback, 'WKWebViewCookieSync', 'injectCookie', [domain, path]);
     }
 };

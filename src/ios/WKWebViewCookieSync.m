@@ -20,15 +20,33 @@
 
 @implementation WKWebViewCookieSync
 
-- (void)sync:(CDVInvokedUrlCommand *)command {
-  self.callbackId = command.callbackId;
-  NSLog(@"Cookie sync attempt");
+- (void)injectCookie:(CDVInvokedUrlCommand *)command {
+    self.callbackId = command.callbackId;
 
-  WKWebView* wkWebView = (WKWebView*) self.webView;
-  wkWebView.configuration.processPool = [[WKProcessPool alloc] init];
+    NSString *domain = command.arguments[0];
+    NSString *path = command.arguments[1];
 
-	CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-	[self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    WKWebView* wkWebView = (WKWebView*) self.webView;
+
+    if (@available(iOS 11.0, *)) {
+        NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+        [cookieProperties setObject:@"foo" forKey:NSHTTPCookieName];
+        [cookieProperties setObject:@"bar" forKey:NSHTTPCookieValue];
+        [cookieProperties setObject:domain forKey:NSHTTPCookieDomain];
+        [cookieProperties setObject:domain forKey:NSHTTPCookieOriginURL];
+        [cookieProperties setObject:path forKey:NSHTTPCookiePath];
+        NSHTTPCookie * cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+
+        [wkWebView.configuration.websiteDataStore.httpCookieStore setCookie:cookie completionHandler:^{NSLog(@"Cookies synced");}];
+
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    }
+    else
+    {
+        CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR]
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+    };
 }
 
 @end
