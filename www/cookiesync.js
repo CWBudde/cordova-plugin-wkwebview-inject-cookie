@@ -26,6 +26,6 @@ module.exports = {
         var domain = url.substr(0,sPos);
         var path = url.substr(sPos,(url.length-sPos));
 
-        exec(successCallback, errorCallback, 'WKWebViewCookieSync', 'injectCookie', [domain, path]);
+        exec(successCallback, errorCallback, 'WKWebViewInjectCookie', 'injectCookie', [domain, path]);
     }
 };

@@ -16,7 +16,7 @@
 
 #import <Cordova/CDV.h>
 
-@interface WKWebViewCookieSync : CDVPlugin
+@interface WKWebViewInjectCookie : CDVPlugin
 
 - (void)injectCookie:(CDVInvokedUrlCommand *)command;
 

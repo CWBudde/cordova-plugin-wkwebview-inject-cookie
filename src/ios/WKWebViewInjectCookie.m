@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-#import "WKWebViewCookieSync.h"
+#import "WKWebViewInjectCookie.h"
 #import <WebKit/WebKit.h>
 #import <Cordova/CDV.h>
 
-@implementation WKWebViewCookieSync
+@implementation WKWebViewInjectCookie
 
 - (void)injectCookie:(CDVInvokedUrlCommand *)command {
     self.callbackId = command.callbackId;
