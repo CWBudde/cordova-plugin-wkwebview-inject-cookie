@@ -10,8 +10,11 @@ Unfortunately this only works for iOS11 and it's necessary to supply the specifi
 
 ```
 document.addEventListener('deviceready', () => {
-  wkwebview.injectCookie('mydomain.com/mypath');
+  wkWebView.injectCookie('mydomain.com/mypath');
 });
 ```
+You have to replace "mydomain.com" with your domain name and "mypath" with your subpath. If the latter is empty than you don't need to provide it (just leave the trailing slash there to tell the plugin that you don't use any extra path).
 
 Once you have injected a cookie all further (session) cookies are synced properly.
+
+If you want you could also pass a success and and error handler. The success handler will be called if the cookie was injected properly, the error handler if not.
