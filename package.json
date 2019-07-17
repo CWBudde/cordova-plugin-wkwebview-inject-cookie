@@ -29,6 +29,6 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/psirenny/cordova-plugin-wkwebview-inject-cookie.git"
+    "url": "git+https://github.com/CWBudde/cordova-plugin-wkwebview-inject-cookie.git"
   }
 }
