@@ -20,13 +20,13 @@
 
 @implementation WKWebViewInjectCookie
 
-- (void)injectCookie:(CDVInvokedUrlCommand *)command {
+- (void)setCookie:(CDVInvokedUrlCommand *)command {
     self.callbackId = command.callbackId;
 
     NSString *domain = command.arguments[0];
     NSString *path = command.arguments[1];
-    NSString *name = @"foo";
-    NSString *value = @"bar";
+    NSString *name = command.arguments[2];
+    NSString *value = command.arguments[3];
 
     WKWebView* wkWebView = (WKWebView*) self.webView;
 

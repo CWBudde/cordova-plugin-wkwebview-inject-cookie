@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 Christian-W. Budde
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-var exec = require('cordova/exec');
+var exec = require("cordova/exec");
 
 module.exports = {
-    injectCookie: function (url, successCallback, errorCallback) {
+  setCookie: function (url, name, value, successCallback, errorCallback) {
 
-        if ((url.substr(0,4)=="http")&&(url.indexOf("\/\/")>=0)) {
-          url = url.slice(url.indexOf("\/\/")+2);
-        };
-        var sPos = url.indexOf("\/");
-        var domain = url.substr(0,sPos);
-        var path = url.substr(sPos,(url.length-sPos));
-
-        exec(successCallback, errorCallback, 'WKWebViewInjectCookie', 'injectCookie', [domain, path]);
+    if ((url.substr(0,4)==="http")&&(url.indexOf("\/\/")>=0)) {
+      url = url.slice(url.indexOf("\/\/")+2);
     }
+    var sPos = url.indexOf("\/");
+    var domain = url.substr(0,sPos);
+    var path = url.substr(sPos,(url.length-sPos));
+
+    exec(successCallback, errorCallback, "WKWebViewInjectCookie",
+      "setCookie", [domain, path, name ? name : "foo", value ? value : "bar"]);
+  },
+  injectCookie: function (url, successCallback, errorCallback) {
+    setCookie(url, "foo", "bar", successCallback, errorCallback);
+  }
 };
