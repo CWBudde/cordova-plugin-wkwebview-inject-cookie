@@ -27,6 +27,8 @@
     NSString *path = command.arguments[1];
     NSString *name = command.arguments[2];
     NSString *value = command.arguments[3];
+    
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 
     WKWebView* wkWebView = (WKWebView*) self.webView;
 
