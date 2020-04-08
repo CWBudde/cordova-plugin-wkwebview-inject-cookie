@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-wkwebview-inject-cookie",
   "description": "Cordova plugin to inject a dummy cookie in a WKWebView instance. This is necessary to get the sync process started.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Christian-W. Budde <CWBudde@pcjv.de>",
   "bugs": {
     "url": "https://github.com/CWBudde/cordova-plugin-wkwebview-inject-cookie/issues"

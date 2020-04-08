@@ -30,6 +30,6 @@ module.exports = {
       "setCookie", [domain, path, name ? name : "foo", value ? value : "bar"]);
   },
   injectCookie: function (url, successCallback, errorCallback) {
-    setCookie(url, "foo", "bar", successCallback, errorCallback);
+    this.setCookie(url, "foo", "bar", successCallback, errorCallback);
   }
 };
