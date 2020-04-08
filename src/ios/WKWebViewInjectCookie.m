@@ -25,19 +25,22 @@
 
     NSString *domain = command.arguments[0];
     NSString *path = command.arguments[1];
+    NSString *name = @"foo";
+    NSString *value = @"bar";
 
     WKWebView* wkWebView = (WKWebView*) self.webView;
 
     if (@available(iOS 11.0, *)) {
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        [cookieProperties setObject:@"foo" forKey:NSHTTPCookieName];
-        [cookieProperties setObject:@"bar" forKey:NSHTTPCookieValue];
+        [cookieProperties setObject:name forKey:NSHTTPCookieName];
+        [cookieProperties setObject:value forKey:NSHTTPCookieValue];
         [cookieProperties setObject:domain forKey:NSHTTPCookieDomain];
         [cookieProperties setObject:domain forKey:NSHTTPCookieOriginURL];
         [cookieProperties setObject:path forKey:NSHTTPCookiePath];
         NSHTTPCookie * cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
 
         [wkWebView.configuration.websiteDataStore.httpCookieStore setCookie:cookie completionHandler:^{NSLog(@"Cookies synced");}];
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
