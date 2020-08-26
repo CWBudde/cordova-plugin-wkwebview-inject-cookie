@@ -25,7 +25,7 @@
     "sync",
     "wkwebview"
   ],
-  "license": "Unlicense",
+  "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
     "type": "git",
