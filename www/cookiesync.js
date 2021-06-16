@@ -27,8 +27,17 @@ module.exports = {
     getCookies: function (url, successCallback, errorCallback) {
         exec(successCallback, errorCallback, "WKWebViewInjectCookie",
             "getCookies", [url]);
-    }
-    injectCookie: function (domain, path, successCallback, errorCallback) {
+    },
+    injectCookie: function (domain, path = '', successCallback, errorCallback) {
+        if ((domain.substr(0,4)==="http")&&(domain.indexOf("\/\/")>=0)) {
+          domain = domain.slice(domain.indexOf("\/\/")+2);
+        }
+        if (path === '') {
+            var sPos = domain.indexOf("\/");
+            path = domain.substr(sPos, (domain.length - sPos));
+            var domain = domain.substr(0, sPos);
+          }
+      
         this.setCookie(domain, path, "foo", "bar", new Date((new Date()).getFullYear() + 10, 11, 31), successCallback, errorCallback);
     }
 };
