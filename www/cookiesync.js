@@ -21,7 +21,7 @@ module.exports = {
         var expireDate = (expire ? expire.toISOString() : null);
 
         exec(successCallback, errorCallback, "WKWebViewInjectCookie",
-            "setCookie", [domain, path, name ? name : "foo", value ? value : "bar", expireDate, secure, maxAge ? maxAge : 2592000]);
+            "setCookie", [domain, path, name ? name : "foo", value ? value : "bar", expireDate, secure ? secure : true, maxAge ? maxAge : 2592000]);
     },
 
     getCookies: function (url, successCallback, errorCallback) {
@@ -38,11 +38,11 @@ module.exports = {
         if (path === '') {
             var sPos = domain.indexOf("\/");
             path = domain.substr(sPos, (domain.length - sPos));
-            var domain = domain.substr(0, sPos);
+            domain = domain.substr(0, sPos);
           }
 
         // ensure the path is at least a slash
-        var lastChar = url.substr(-1);
+        var lastChar = path.substr(-1);
         if (lastChar != '/') {
             path = path + '/';
          }
