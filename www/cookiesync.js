@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2020 Christian-W. Budde
+ * Copyright 2017-2021 Christian-W. Budde
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,11 @@
 var exec = require("cordova/exec");
 
 module.exports = {
-    setCookie: function (domain, path, name, value, expire, successCallback, errorCallback) {
+    setCookie: function (domain, path, name, value, expire, secure, maxAge, successCallback, errorCallback) {
         var expireDate = (expire ? expire.toISOString() : null);
 
         exec(successCallback, errorCallback, "WKWebViewInjectCookie",
-            "setCookie", [domain, path, name ? name : "foo", value ? value : "bar", expireDate]);
+            "setCookie", [domain, path, name ? name : "foo", value ? value : "bar", expireDate, secure, maxAge ? maxAge : 2592000]);
     },
 
     getCookies: function (url, successCallback, errorCallback) {
@@ -47,6 +47,6 @@ module.exports = {
             path = path + '/';
          }
       
-        this.setCookie(domain, path, "foo", "bar", new Date((new Date()).getFullYear() + 10, 11, 31), successCallback, errorCallback);
+        this.setCookie(domain, path, "foo", "bar", new Date((new Date()).getFullYear() + 1, 11, 31), true, 31536000, successCallback, errorCallback);
     }
 };

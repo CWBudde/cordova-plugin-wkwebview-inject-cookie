@@ -1,5 +1,5 @@
 /* 
- * Copyright 2018 Christian-W. Budde
+ * Copyright 2018-2021 Christian-W. Budde
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,8 @@
     NSString *name = command.arguments[2];
     NSString *value = command.arguments[3];
     NSString *expire = command.arguments[4];
+    NSString *secure = command.arguments[5];
+    NSString *maxAge = command.arguments[6];
 
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 
@@ -40,6 +42,8 @@
         [cookieProperties setObject:domain forKey:NSHTTPCookieDomain];
         [cookieProperties setObject:domain forKey:NSHTTPCookieOriginURL];
         [cookieProperties setObject:path forKey:NSHTTPCookiePath];
+        [cookieProperties setObject:secure forKey:NSHTTPCookieSecure];
+        [cookieProperties setObject:maxAge forKey:NSHTTPCookieMaximumAge];
 
         if (![expire isEqual: [NSNull null]]) {
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -78,7 +82,6 @@
 
     [cookies getAllCookies:^(NSArray<NSHTTPCookie *> * _Nonnull allCookies) {
         NSMutableArray<NSDictionary*> *array = [NSMutableArray array];
-
  
         for (NSHTTPCookie *cookie in allCookies) {
             if (url == nil || [url length] == 0 || [url rangeOfString:cookie.domain].location != NSNotFound) {
