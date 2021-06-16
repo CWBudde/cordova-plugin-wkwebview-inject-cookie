@@ -1,4 +1,4 @@
-# cordova-plugin-wkwebview-cookie-sync
+# cordova-plugin-wkwebview-inject-cookie
 
 When switching to wkWebView in Cordova for iOS some plugins have the known issue that cookies won't be used properly on the very first start of the application, or every time using the iOS Simulator. In particular session cookies. This is due to a [missing proper sync between the underlying WKHTTPCookieStore and the WebView](https://stackoverflow.com/a/49534854/2757879).
 
@@ -10,7 +10,7 @@ Unfortunately this only works for iOS11 and it's necessary to supply the specifi
 
 ```
 document.addEventListener('deviceready', () => {
-  wkWebView.injectCookie('mydomain.com/mypath');
+  wkWebView.injectCookie('mydomain.com', 'mypath');
 });
 ```
 You have to replace "mydomain.com" with your domain name and "mypath" with your subpath. If the latter is empty than you don't need to provide it (just leave the trailing slash there to tell the plugin that you don't use any extra path).
