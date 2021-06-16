@@ -29,14 +29,23 @@ module.exports = {
             "getCookies", [url]);
     },
     injectCookie: function (domain, path = '', successCallback, errorCallback) {
+        // eventually strip http* from domain
         if ((domain.substr(0,4)==="http")&&(domain.indexOf("\/\/")>=0)) {
           domain = domain.slice(domain.indexOf("\/\/")+2);
         }
+
+        // ensure that the path is not empty (eventually extract from domain)
         if (path === '') {
             var sPos = domain.indexOf("\/");
             path = domain.substr(sPos, (domain.length - sPos));
             var domain = domain.substr(0, sPos);
           }
+
+        // ensure the path is at least a slash
+        var lastChar = url.substr(-1);
+        if (lastChar != '/') {
+            path = path + '/';
+         }
       
         this.setCookie(domain, path, "foo", "bar", new Date((new Date()).getFullYear() + 10, 11, 31), successCallback, errorCallback);
     }
