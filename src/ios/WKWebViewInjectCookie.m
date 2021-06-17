@@ -45,19 +45,25 @@
         [cookieProperties setObject:secure forKey:NSHTTPCookieSecure];
         [cookieProperties setObject:maxAge forKey:NSHTTPCookieMaximumAge];
 
-        if (![expire isEqual: [NSNull null]]) {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
-            NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-            [formatter setLocale:posix];
-            NSDate *date = [formatter dateFromString:expire];
-            [cookieProperties setObject:date forKey:NSHTTPCookieExpires];
+        @try {
+            if (![expire isEqual: [NSNull null]]) {
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"];
+                NSLocale *posix = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+                [formatter setLocale:posix];
+                NSDate *date = [formatter dateFromString:expire];
+                [cookieProperties setObject:date forKey:NSHTTPCookieExpires];
+            }
+
+            NSHTTPCookie * cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
+
+            [wkWebView.configuration.websiteDataStore.httpCookieStore setCookie:cookie completionHandler:^{NSLog(@"Cookies synced");}];
+            [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+        } @catch(NSException *e) {
+            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Unknown exception"];
+            [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
+            return;
         }
-
-        NSHTTPCookie * cookie = [NSHTTPCookie cookieWithProperties:cookieProperties];
-
-        [wkWebView.configuration.websiteDataStore.httpCookieStore setCookie:cookie completionHandler:^{NSLog(@"Cookies synced");}];
-        [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
