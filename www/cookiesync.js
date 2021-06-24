@@ -21,7 +21,7 @@ module.exports = {
         var expireDate = (expire ? expire.toISOString() : null);
 
         exec(successCallback, errorCallback, "WKWebViewInjectCookie",
-            "setCookie", [domain, path, name ? name : "foo", value ? value : "bar", expireDate, secure ? secure : true, maxAge ? maxAge : 2592000]);
+            "setCookie", [domain, path, name ? name : "foo", value ? value : "bar", expireDate, secure, maxAge ? maxAge : 2592000]);
     },
 
     getCookies: function (url, successCallback, errorCallback) {
